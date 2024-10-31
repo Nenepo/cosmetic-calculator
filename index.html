@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ingredient Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="section">
+      <div class="calculator">
+        <h1>Ingredient Calculator</h1>
+
+        <div class="hlb">
+          <label for="hlbToggle">Calculate using HLB system?</label>
+          <input type="checkbox" id="hlbToggle" onclick="toggleHLB()" />
+        </div>
+        <div class="batch-size">
+          <label for="batchSize">Batch Size (grams):</label>
+          <input
+            type="number"
+            id="batchSize"
+            placeholder="g"
+          />
+        </div>
+        <!-- Ingredient Selection and Input -->
+        <div class="ingredient-entry">
+          <label for="ingredient">Choose Ingredient:</label>
+          <div class="dropdown-ingredient">
+            <select id="ingredient">
+              <option value="">Select an ingredient</option>
+              <option value="water">Water</option>
+              <option value="glycerin">Glycerin</option>
+              <option value="coconutOil">Coconut Oil</option>
+            </select>
+            <input
+              type="number"
+              id="dropdownPercentage"
+              placeholder="%"
+              max="100"
+             
+            />
+            <button onclick="addIngredient('dropdown')">Add</button>
+          </div>
+
+          <div>
+            <label for="manualIngredient">Or add manually:</label>
+            <div class="manual-ingredient">
+              <input
+                type="text"
+                id="manualIngredient"
+                placeholder="Enter ingredient name"
+              />
+              <input
+                type="number"
+                id="manualPercentage"
+                placeholder="%"
+                max="100"
+               
+              />
+              <button onclick="addIngredient('manual')">Add</button>
+            </div>
+          </div>
+
+          <!-- <div>
+            <label for="phLevel">pH Level (Optional):</label>
+            <input
+              type="number"
+              id="phLevel"
+              placeholder="Enter pH level"
+              step="0.1"
+              min="0"
+              max="14"
+            />
+          </div> -->
+        </div>
+
+        <!-- Ingredient List Table -->
+        <div class="ingredient-list">
+          <!-- <h4>Ingredients List</h4> -->
+          <table id="ingredientTable">
+            <tr>
+              <th>Ingredient</th>
+              <th>Percentage (%)</th>
+              <th>Weight (grams)</th>
+            </tr>
+          </table>
+        </div>
+
+        <!-- total % and reset buttons -->
+        <div class="output-reset">
+          <div id="output">
+            <h5>Total Percentage: <span id="totalPercentage">0%</span></h5>
+            <p id="totalMessage"></p>
+          </div>
+          <div>
+            <button onclick="resetCalculator()">reset</button>
+            <!-- <button onclick="calculatorIngredient()">Calculate</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="calculator.js"></script>
+  </body>
+</html>

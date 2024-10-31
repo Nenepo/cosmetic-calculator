@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  box-sizing: border-box;
+}
+body {
+ font-family: 'poppins', sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  
+}
+
+.section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  
+}
+.calculator {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 600px;
+}
+
+h1, h2 {
+  text-align: center;
+  color: #333;
+}
+
+
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 15px;
+  font-weight:500;
+}
+
+option{
+  color: #333;
+}
+input[type="number"], input[type="text"], select {
+  width: 100%;
+  padding: 8px  ;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  
+}
+
+
+
+.hlb{
+  display: flex;
+  align-items: center;
+}
+input[type="checkbox"]{
+  margin-top: 10px;
+}
+button:hover {
+  background-color: #fecdce;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.dropdown-ingredient{
+  display: flex;
+  gap: 10px;
+}
+
+.manual-ingredient{
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  background-color: #fbc6ef;
+  color: black;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  /* font-size: 10px; */
+  cursor: pointer;
+}
+
+.output-reset{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ingredient-list{
+  margin-top: 20px;
+}
+ th{
+  font-weight: 500;
+  font-size: 16px;
+}
+
+td{
+  font-weight: 400;
+  font-size: 14px;
+}
