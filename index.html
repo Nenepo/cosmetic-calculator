@@ -10,35 +10,37 @@
     <div class="section">
       <div class="calculator">
         <h1>Ingredient Calculator</h1>
-
         <div class="hlb">
           <label for="hlbToggle">Calculate using HLB system?</label>
-          <input type="checkbox" id="hlbToggle" onclick="toggleHLB()" />
+          <input type="checkbox" id="hlbToggle" />
         </div>
+        <div class="formula">
+          <!-- <label for="formulaName">Formula name</label> -->
+          <input
+            type="text"
+            name="formula"
+            id="formulaName"
+            placeholder="Formula name"
+          />
+        </div>
+        <hr />
         <div class="batch-size">
           <label for="batchSize">Batch Size (grams):</label>
-          <input
-            type="number"
-            id="batchSize"
-            placeholder="g"
-          />
+          <input type="number" id="batchSize" placeholder="g" />
         </div>
         <!-- Ingredient Selection and Input -->
         <div class="ingredient-entry">
           <label for="ingredient">Choose Ingredient:</label>
           <div class="dropdown-ingredient">
             <select id="ingredient">
+              <!-- call ingredients -->
               <option value="">Select an ingredient</option>
-              <option value="water">Water</option>
-              <option value="glycerin">Glycerin</option>
-              <option value="coconutOil">Coconut Oil</option>
             </select>
             <input
               type="number"
               id="dropdownPercentage"
               placeholder="%"
               max="100"
-             
             />
             <button onclick="addIngredient('dropdown')">Add</button>
           </div>
@@ -56,7 +58,6 @@
                 id="manualPercentage"
                 placeholder="%"
                 max="100"
-               
               />
               <button onclick="addIngredient('manual')">Add</button>
             </div>
@@ -74,18 +75,18 @@
             />
           </div> -->
         </div>
-
         <!-- Ingredient List Table -->
         <div class="ingredient-list">
           <!-- <h4>Ingredients List</h4> -->
           <table id="ingredientTable">
             <tr>
               <th>Ingredient</th>
-              <th>Percentage (%)</th>
-              <th>Weight (grams)</th>
+              <th>(%)</th>
+              <th>(grams)</th>
             </tr>
           </table>
         </div>
+        <div id="hlb-section"></div>
 
         <!-- total % and reset buttons -->
         <div class="output-reset">
@@ -95,12 +96,80 @@
           </div>
           <div>
             <button onclick="resetCalculator()">reset</button>
-            <!-- <button onclick="calculatorIngredient()">Calculate</button> -->
           </div>
+        </div>
+        <hr />
+
+        <div id="phCalculator">
+          <div class="phHeader">
+            <h3>PhCalculator</h3>
+            <div class="checkboxes">
+              <div>
+                <label for="weight">weight</label>
+                <input type="checkbox" name="" id="weight" checked />
+              </div>
+
+              <div>
+                <label for="vol">volume</label>
+                <input type="checkbox" name="" id="vol" />
+              </div>
+              <div>
+                <label for="conc">conc</label>
+                <input type="checkbox" name="" id="conc" />
+              </div>
+            </div>
+          </div>
+          <!-- 2 choices -->
+          <div class="ph-section">
+            <!-- concentration, weight, volume -->
+            <select name="" id="chemicalSelect">
+              <option value="" class="select-style">Select Chemical</option>
+              <option value="acetic acid">Acetic Acid</option>
+              <option value="aniline">Aniline</option>
+              <option value="ammonia">Ammonia</option>
+              <option value="arsenic acid">Arsenic Acid</option>
+              <option value="arsenious acid">Arsenious Acid</option>
+              <option value="benzoic acid">Benzoic Acid</option>
+              <option value="boric acid">Boric Acid</option>
+              <option value="carbonic acid">Carbonic Acid</option>
+              <option value="chlorous acid">Chlorous Acid</option>
+              <option value="citric acid">Citric Acid</option>
+              <option value="formic acid">Formic Acid</option>
+              <option value="hydrocyanic acid">Hydrocyanic Acid</option>
+              <option value="hydrofluoric acid">Hydrofluoric Acid</option>
+              <option value="hydrosulfuric acid">Hydrosulfuric Acid</option>
+              <option value="hydrochloric acid">Hydrochloric Acid</option>
+              <option value="hypochlorous acid">Hypochlorous Acid</option>
+              <option value="nitric acid">Nitric Acid</option>
+              <option value="nitrous acid">Nitrous Acid</option>
+              <option value="perchloric acid">Perchloric Acid</option>
+              <option value="phenol">Phenol</option>
+              <option value="phenol acid">Phenol Acid</option>
+              <option value="phosphoric acid">Phosphoric Acid</option>
+              <option value="phosphorous acid">Phosphorous Acid</option>
+              <option value="sodium hydroxide">Sodium Hydroxide</option>
+              <option value="sulfuric acid">Sulfuric Acid</option>
+              <option value="sulfurous acid">Sulfurous Acid</option>
+            </select>
+
+            <div id="chemicalCalc"></div>
+            <div class="calc-btn">
+              <button id="calculatePh">Calculate</button>
+            </div>
+
+            <div id="results"></div>
+          </div>
+        </div>
+
+        <div id="print">
+          <button class="print">Print</button>
         </div>
       </div>
     </div>
 
     <script src="calculator.js"></script>
+    <script src="phLogic.js"></script>
+    <script src="hlbLogic.js"></script>
+    <script src="printLogic.js"></script>
   </body>
 </html>

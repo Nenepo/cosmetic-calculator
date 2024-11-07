@@ -1,12 +1,45 @@
+
+
 let ingredients = [];
 let totalPercentage = 0;
 
+const chemicalIngredients = [
+  "Aqua",
+  "Sodium cocoyl glutamate",
+  "CocoBetaine",
+  "CocoGlucoside",
+  "Lauryl glucoside",
+  "Sodium cocoamphoacetate",
+  "Sodium Lauryl Glucose Carboxylate",
+  "Glycerin",
+  "Curcuma Longa Root Extract",
+  "Chamomilla Recutita Flower Extract",
+  "Punica Granatum Fruit Extract",
+  "Sodium Benzoate",
+  "Guar hydroxypropyltrimonium chloride",
+  "Citric Acid",
+  "Bisabolol"
+];
 
 
-// fetch ingredients from an api
-// ph calculator
-// figure out the hlb system
-// make it mobile responsive
+const populateDropdown = (ingredients) => {
+  const dropdown = document.getElementById('ingredient');
+
+  ingredients.forEach((ingredient) => {
+    const option = document.createElement('option');
+    option.value = ingredient;
+    option.text = ingredient;
+    dropdown.appendChild(option);
+  });
+
+}
+
+populateDropdown(chemicalIngredients);
+
+
+
+
+
 
 function addIngredient(type) {
 
@@ -49,8 +82,8 @@ function renderIngredients() {
   table.innerHTML = `
     <tr>
       <th>Ingredient</th>
-      <th>Percentage (%)</th>
-      <th>Weight (grams)</th>
+      <th> (%)</th>
+      <th> (grams)</th>
       <th>Actions</th>
     </tr>
   `;
@@ -98,15 +131,34 @@ function clearInputs() {
 const resetCalculator = () => {
   clearInputs();
 
-  document.getElementById('batchSize').textContent = '';
+  document.getElementById('batchSize').value = '';
 
   // Clear ingredients array
   ingredients = [];
-
-  // Re-render the empty ingredient table
-  renderIngredients();
-
   // Reset total percentage display
   totalPercentage = 0;
   document.getElementById('totalPercentage').textContent = '0%';
-}
+
+  // Reset HLB-related ingredients and values
+  oilPhaseIngredients = [];
+  emulsifierIngredients = [];
+
+  if (document.getElementById('hlb-section')) {
+    updateOilPhaseTable();
+    updateEmulsifierTable();
+    document.getElementById('requiredHLB').textContent = '0.00';
+    document.getElementById('actualHLB').textContent = '0.00';
+    document.getElementById('hlbCompatibility').textContent = '-';
+    document.getElementById('hlbCompatibility').style.color = 'black';
+  }
+};
+
+
+// const formulaName = document.getElementById("formulaName").value
+
+
+// const printBtn = document.querySelector(".print")
+
+// printBtn.addEventListener('click', (e) => {
+//   e.preventDefault()
+// })
