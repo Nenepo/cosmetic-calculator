@@ -1,24 +1,112 @@
-const hlbValues = {
-  'mineral oil': 10,
-  'paraffin oil': 10,
-  'castor oil': 14,
-  'olive oil': 7,
-  'coconut oil': 8,
-  'shea butter': 6,
-  'cocoa butter': 6,
-  'isopropyl myristate': 11.5,
-  'cetyl alcohol': 15.5,
-  'polysorbate 20': 16.7,
-  'polysorbate 60': 14.9,
-  'polysorbate 80': 15,
-  'span 20': 8.6,
-  'span 60': 4.7,
-  'span 80': 4.3,
-  'glyceryl monostearate': 3.8,
-  'ceteareth-20': 15.2,
-  'steareth-20': 15.3,
-  'cetearyl alcohol': 15.5,
+const HLB_VALUES_EMULSIFIERS = {
+  "Beeswax": 12,
+  "Candelilla Wax": 14,
+  "Carnauba Wax": 12,
+  "Cetyl Alcohol Flakes": 15.5,
+  "Emulsifying Wax Conditioning": 14.9,
+  "Emulsifying Wax Conditioning Plus": 14.9,
+  "Emulsifying Wax Soft & Silky": 14.9,
+  "Emulsifying Wax Traditional": 14.9,
+  "Polysorbate 20": 16.7,
+  "Polysorbate 80": 15,
+  "Smooth & Creamy Lotion Bar Additive": 4.5,
+  "Stearic Acid": 15,
+  "Ceteareth-20": 15.2,
+  "Cetearyl Glucoside": 11,
+  "Ceteth-10": 12.9,
+  "Ceteth-2": 5.3,
+  "Ceteth-20": 15.7,
+  "Cocamide MEA": 13.5,
+  "Conditioning Emulsifier": 15,
+  "Emulsifying Wax NF": 15,
+  "Glyceryl Laurate": 5.2,
+  "Glyceryl Stearate": 3.8,
+  "Glyceryl Stearate and PEG-100 Stearate": 11,
+  "Glyceryl Stearate SE": 5.8,
+  "Glycol Distearate": 1,
+  "Glycol Stearate": 2.9,
+  "Isoceteth-20": 15.7,
+  "Isosteareth-20": 15,
+  "Lauramide DEA": 15,
+  "Laureth-23": 16.9,
+  "Laureth-4": 9.7,
+  "Lecithin": 4,
+  "Linoleamide DEA": 10,
+  "Methyl Glucose Sesquistearate": 6.6,
+  "Nature Mulse (aka Natramulse)": 3.8,
+  "Oleth-10": 12.4,
+  "Oleth-10/Polyoxyl 10 Oleyl Ether NF": 12.4,
+  "Oleth-2": 4.9,
+  "Oleth-20": 15.3,
+  "PEG-100 Stearate": 18.8,
+  "PEG-20 Almond Glycerides": 10,
+  "PEG-20 Methyl Glucose Sesquistearate": 15,
+  "PEG-25 Hydrogenated Castor Oil": 10.8,
+  "PEG-30 Dipolyhydroxystearate": 5.5,
+  "PEG-4 Dilaurate": 6,
+  "PEG-40 Sorbitan Peroleate": 9,
+  "PEG-60 Almond Glycerides": 15,
+  "PEG-7 Esters Olive Oil": 11,
+  "PEG-8 Laurate": 13,
+  "PEG-80 Sorbitan Laurate": 19.1,
+  "Polysorbate 60": 14.9,
+  "Polysorbate 85": 11,
+  "Propylene Glycol Isostearate": 2.5,
+  "Sodium Stearoyl Lactylate": 8.3,
+  "Sorbitan Isostearate": 4.7,
+  "Sorbitan Laurate": 8.6,
+  "Sorbitan Oleate": 4.3,
+  "Sorbitan Sesquioleate": 3.7,
+  "Sorbitan Stearate": 4.7,
+  "Sorbitan Stearate and Sucrose Cocoate": 6,
+  "Sorbitan Trioleate": 1.8,
+  "Stearamide MEA": 11,
+  "Steareth-2": 4.9,
+  "Steareth-21": 15.5
 };
+const HLB_VALUES_OIL_PHASE = {
+  "Almond Oil NF": 6,
+  "Anhydrous Lanolin USP": 10,
+  "Apricot Kernel Oil": 7,
+  "Avocado Oil": 7,
+  "Babassu Oil": 8,
+  "Beeswax": 12,
+  "Borage Seed Oil": 7,
+  "Brazil Nut Oil": 8,
+  "C12-15 Alkyl Benzoate": 13,
+  "Canola Oil": 7,
+  "Caprylic/Capric Triglyceride": 11,
+  "Carnauba Wax": 12,
+  "Carrot Root Extract": 6,
+  "Carrot Seed Oil": 6,
+  "Castor Oil": 14,
+  "Ceresin": 8,
+  "Cetearyl Alcohol NF": 15.5,
+  "Cetyl Alcohol": 15.5,
+  "Cetyl Esters": 10,
+  "Cetyl Palmitate": 10,
+  "Cocoa Butter": 6,
+  "Coconut Oil": 8,
+  "Cyclomethicone": 7.75,
+  "Diisopropyl Adipate": 9,
+  "Dimethicone": 5,
+  "Dog Rose Hips Oil": 7,
+  "Emu Oil": 8,
+  "Evening Primrose Oil": 7,
+  "Grape Seed Oil": 7,
+  "Hemp Oil": 7,
+  "Hybrid Safflower Oil": 9,
+  "Isopropyl Myristate": 11.5,
+  "Isopropyl Palmitate": 11.5,
+  "Jojoba Oil": 6.5,
+  "Kokum Butter": 8,
+  "Kukui Nut Oil": 7,
+  "Lanolin": 10,
+  "Macadamia Nut Oil": 7,
+  "Mango Seed Butter": 8,
+  "Meadowfoam Seed Oil": 6.5
+};
+
 
 // HTML structure when HLB toggle is checked
 function createHLBSection() {
@@ -31,8 +119,8 @@ function createHLBSection() {
         <div class="dropdown-ingredient">
           <select id="oilIngredient">
             <option value="">Select oil/butter/ester</option>
-            ${Object.keys(hlbValues)
-          .filter(ing => hlbValues[ing] < 12)
+            ${Object.keys(HLB_VALUES_OIL_PHASE)
+          .filter(ing => HLB_VALUES_OIL_PHASE[ing] < 12)
            .map(ing => `<option value="${ing}">${ing}</option>`)
             .join('')}
           </select>
@@ -55,8 +143,8 @@ function createHLBSection() {
         <div class="dropdown-ingredient">
           <select id="emulsifierIngredient">
             <option value="">Select emulsifier</option>
-            ${Object.keys(hlbValues)
-      .filter(ing => hlbValues[ing] >= 12)
+            ${Object.keys(HLB_VALUES_EMULSIFIERS)
+      .filter(ing => HLB_VALUES_EMULSIFIERS[ing] >= 12)
       .map(ing => `<option value="${ing}">${ing}</option>`)
       .join('')}
           </select>
@@ -115,7 +203,7 @@ function addHLBIngredient(type) {
     return;
   }
 
-  const hlbValue = hlbValues[ingredient];
+  const hlbValue = HLB_VALUES_EMULSIFIERS[ingredient] || HLB_VALUES_OIL_PHASE[ingredient] ;
 
   if (type === 'oil') {
     oilPhaseIngredients.push({ name: ingredient, percentage, hlbValue });
