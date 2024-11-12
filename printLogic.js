@@ -1,20 +1,23 @@
 function printResults() {
   // Create a new window for printing
   const printWindow = window.open('', '_blank');
-  
+
   // Get formula details
   const formulaName = document.getElementById('formulaName').value || 'Untitled Formula';
   const batchSize = document.getElementById('batchSize').value || '0';
   const totalPercentage = document.getElementById('totalPercentage').textContent;
   const isHLBEnabled = document.getElementById('hlbToggle').checked;
-  
+
   // Get ingredients table
   const ingredientTable = document.getElementById('ingredientTable');
   const ingredients = Array.from(ingredientTable.rows).slice(1); // Skip header row
-  
+
   // Get pH calculation results if they exist
   const phResults = document.getElementById('results').innerHTML;
-  
+
+  // get instructions
+  const instructions = document.getElementById("instructions").value || 'no instructions';
+
   // Create print content
   let printContent = `
     <!DOCTYPE html>
@@ -41,6 +44,8 @@ function printResults() {
         <p><strong>Batch Size:</strong> ${batchSize} grams</p>
         <p><strong>Total Percentage:</strong> ${totalPercentage}</p>
         ${isHLBEnabled ? '<p><strong>HLB System:</strong> Enabled</p>' : ''}
+                <p><strong>Instructions:</strong> ${instructions}</p>
+
       </div>
 
       <div class="results-section">
@@ -52,7 +57,7 @@ function printResults() {
             <th>Weight (g)</th>
           </tr>
   `;
-  
+
   // Add ingredient rows
   ingredients.forEach(row => {
     printContent += `
@@ -63,12 +68,12 @@ function printResults() {
       </tr>
     `;
   });
-  
+
   printContent += `
       </table>
     </div>
   `;
-  
+
   // Add pH results if they exist
   if (phResults) {
     printContent += `
@@ -78,7 +83,7 @@ function printResults() {
       </div>
     `;
   }
-  
+
   // Add footer with date
   printContent += `
       <div class="footer">
@@ -89,7 +94,7 @@ function printResults() {
     </body>
     </html>
   `;
-  
+
   // Write to the new window and trigger print
   printWindow.document.write(printContent);
   printWindow.document.close();

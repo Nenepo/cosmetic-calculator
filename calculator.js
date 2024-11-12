@@ -132,7 +132,8 @@ const resetCalculator = () => {
   clearInputs();
 
   document.getElementById('batchSize').value = '';
-
+  const instructions = document.getElementById("instructions").value
+  instructions = ''
   // Clear ingredients array
   ingredients = [];
   // Reset total percentage display
@@ -154,11 +155,3 @@ const resetCalculator = () => {
 };
 
 
-// const formulaName = document.getElementById("formulaName").value
-
-
-// const printBtn = document.querySelector(".print")
-
-// printBtn.addEventListener('click', (e) => {
-//   e.preventDefault()
-// })

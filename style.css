@@ -167,6 +167,17 @@ justify-items: center;
 #oilPhaseTable{
   overflow-x: scroll;
 }
+
+.instructions{
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  gap: 4px;
+}
+textarea{
+  min-height: 200px;
+  font-size: 16px;
+}
 @media (min-width: 600px)  {
   
   .calculator {
