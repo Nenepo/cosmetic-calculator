@@ -44,7 +44,6 @@ function printResults() {
         <p><strong>Batch Size:</strong> ${batchSize} grams</p>
         <p><strong>Total Percentage:</strong> ${totalPercentage}</p>
         ${isHLBEnabled ? '<p><strong>HLB System:</strong> Enabled</p>' : ''}
-                <p><strong>Instructions:</strong> ${instructions}</p>
 
       </div>
 
@@ -68,6 +67,7 @@ function printResults() {
       </tr>
     `;
   });
+ ` <p><strong>Instructions:</strong> ${instructions}</p>`
 
   printContent += `
       </table>

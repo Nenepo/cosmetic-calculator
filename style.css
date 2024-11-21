@@ -9,7 +9,6 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  
 }
 
 h1, h2 {
@@ -122,6 +121,12 @@ button {
 
 .ingredient-list{
   margin-top: 20px;
+  overflow-x: scroll;
+  width: auto;
+}
+.scroll-ingredients{
+  overflow-x: hidden;
+
 }
  th{
   font-weight: 500;

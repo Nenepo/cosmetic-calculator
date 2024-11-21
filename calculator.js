@@ -43,7 +43,7 @@ populateDropdown(chemicalIngredients);
 
 function addIngredient(type) {
 
-  let percentage, manualIngredient, selectedIngredient, calculatedGrams = 0
+  let percentage, manualIngredient, selectedIngredient, calculatedGrams, calculatedVolume = 0
   const batchSize = parseFloat(document.getElementById('batchSize').value);
 
 
@@ -61,11 +61,16 @@ function addIngredient(type) {
     // Calculate grams only if `batchSize` is a valid number
     if (batchSize) {
       calculatedGrams = (percentage / 100) * batchSize;
+      calculatedVolume = (calculatedGrams / percentage) * 100;
+
     }
+
     ingredients.push({
       name: manualIngredient || selectedIngredient,
       percentage,
-      grams: calculatedGrams
+      grams: calculatedGrams,
+      volume: calculatedVolume  ? calculatedVolume.toFixed(2) : ""
+
     });
     renderIngredients();
     calculateTotal();
@@ -84,17 +89,20 @@ function renderIngredients() {
       <th>Ingredient</th>
       <th> (%)</th>
       <th> (grams)</th>
+            <th> (vol)</th>
+
       <th>Actions</th>
     </tr>
   `;
 
   ingredients.forEach((data, index) => {
     const row = document.createElement('tr');
-    console.log(data.grams)
     row.innerHTML = `
       <td>${data.name}</td>
       <td>${data.percentage ? data.percentage : ''}</td>
       <td>${data.grams ? data.grams : ''}</td>
+      <td>${data.volume ? data.volume : ''}</td>
+
       <td><button onclick="deleteIngredient(${index})">Delete</button></td>
     `;
     table.appendChild(row);
@@ -116,7 +124,7 @@ function calculateTotal() {
 
 
 function clearInputs() {
-  const inputIds = ['ingredient', 'manualIngredient', 'dropdownPercentage', 'manualPercentage', 'grams'];
+  const inputIds = ['ingredient', 'manualIngredient', 'dropdownPercentage', 'manualPercentage', 'grams', ];
 
   inputIds.forEach(id => {
     const input = document.getElementById(id);
@@ -132,10 +140,10 @@ const resetCalculator = () => {
   clearInputs();
 
   document.getElementById('batchSize').value = '';
-  const instructions = document.getElementById("instructions").value
-  instructions = ''
+ document.getElementById("instructions").value = '';
   // Clear ingredients array
   ingredients = [];
+  renderIngredients()
   // Reset total percentage display
   totalPercentage = 0;
   document.getElementById('totalPercentage').textContent = '0%';
@@ -144,7 +152,9 @@ const resetCalculator = () => {
   oilPhaseIngredients = [];
   emulsifierIngredients = [];
 
-  if (document.getElementById('hlb-section')) {
+  const hlbToggle = document.getElementById('hlbToggle');
+
+  if (hlbToggle.checked ) {
     updateOilPhaseTable();
     updateEmulsifierTable();
     document.getElementById('requiredHLB').textContent = '0.00';
