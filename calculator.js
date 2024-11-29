@@ -61,7 +61,7 @@ function addIngredient(type) {
     // Calculate grams only if `batchSize` is a valid number
     if (batchSize) {
       calculatedGrams = (percentage / 100) * batchSize;
-      calculatedVolume = (calculatedGrams / percentage) * 100;
+      calculatedVolume = (batchSize / percentage) * 100;
 
     }
 
