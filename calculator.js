@@ -4,21 +4,21 @@ let ingredients = [];
 let totalPercentage = 0;
 
 const chemicalIngredients = [
-  "Aqua",
-  "Sodium cocoyl glutamate",
-  "CocoBetaine",
-  "CocoGlucoside",
-  "Lauryl glucoside",
-  "Sodium cocoamphoacetate",
-  "Sodium Lauryl Glucose Carboxylate",
-  "Glycerin",
-  "Curcuma Longa Root Extract",
-  "Chamomilla Recutita Flower Extract",
-  "Punica Granatum Fruit Extract",
-  "Sodium Benzoate",
-  "Guar hydroxypropyltrimonium chloride",
-  "Citric Acid",
-  "Bisabolol"
+  { name: "Aqua", density: 1.0 }, // Water's density in g/mL
+  { name: "Sodium cocoyl glutamate", density: 1.05 },
+  { name: "CocoBetaine", density: 1.04 },
+  { name: "CocoGlucoside", density: 1.1 },
+  { name: "Lauryl glucoside", density: 1.12 },
+  { name: "Sodium cocoamphoacetate", density: 1.04 },
+  { name: "Sodium Lauryl Glucose Carboxylate", density: 1.15 },
+  { name: "Glycerin", density: 1.26 },
+  { name: "Curcuma Longa Root Extract", density: 1.02 }, // Estimated for turmeric extract
+  { name: "Chamomilla Recutita Flower Extract", density: 1.0 }, // Estimated for herbal extracts
+  { name: "Punica Granatum Fruit Extract", density: 1.05 }, // Pomegranate extract
+  { name: "Sodium Benzoate", density: 1.44 },
+  { name: "Guar hydroxypropyltrimonium chloride", density: 1.01 },
+  { name: "Citric Acid", density: 1.66 }, // Density of citric acid anhydrous
+  { name: "Bisabolol", density: 0.96 } // Bisabolol's density (lighter than water)
 ];
 
 
@@ -27,8 +27,8 @@ const populateDropdown = (ingredients) => {
 
   ingredients.forEach((ingredient) => {
     const option = document.createElement('option');
-    option.value = ingredient;
-    option.text = ingredient;
+    option.value = ingredient.name;
+    option.text = ingredient.name;
     dropdown.appendChild(option);
   });
 
@@ -61,15 +61,22 @@ function addIngredient(type) {
     // Calculate grams only if `batchSize` is a valid number
     if (batchSize) {
       calculatedGrams = (percentage / 100) * batchSize;
-      calculatedVolume = (batchSize / percentage) * 100;
+      calculatedVolume = calculatedGrams / ingredientData.density;
 
     }
+
+    const ingredientData = chemicalIngredients.find(ing => ing.name === ( selectedIngredient));
+
+    if (!batchSize && ingredientData.density) {
+      calculatedVolume = percentage / ingredientData.density;
+    }
+
 
     ingredients.push({
       name: manualIngredient || selectedIngredient,
       percentage,
-      grams: calculatedGrams,
-      volume: calculatedVolume  ? calculatedVolume.toFixed(2) : ""
+      grams: calculatedGrams ? calculatedGrams.toFixed(2) : "",
+      volume: calculatedVolume ? calculatedVolume.toFixed(2) : ""
 
     });
     renderIngredients();
@@ -89,8 +96,7 @@ function renderIngredients() {
       <th>Ingredient</th>
       <th> (%)</th>
       <th> (grams)</th>
-            <th> (vol)</th>
-
+      <th> (vol)</th>
       <th>Actions</th>
     </tr>
   `;
@@ -124,7 +130,7 @@ function calculateTotal() {
 
 
 function clearInputs() {
-  const inputIds = ['ingredient', 'manualIngredient', 'dropdownPercentage', 'manualPercentage', 'grams', ];
+  const inputIds = ['ingredient', 'manualIngredient', 'dropdownPercentage', 'manualPercentage'];
 
   inputIds.forEach(id => {
     const input = document.getElementById(id);
@@ -140,7 +146,7 @@ const resetCalculator = () => {
   clearInputs();
 
   document.getElementById('batchSize').value = '';
- document.getElementById("instructions").value = '';
+  document.getElementById("instructions").value = '';
   // Clear ingredients array
   ingredients = [];
   renderIngredients()
@@ -154,7 +160,7 @@ const resetCalculator = () => {
 
   const hlbToggle = document.getElementById('hlbToggle');
 
-  if (hlbToggle.checked ) {
+  if (hlbToggle.checked) {
     updateOilPhaseTable();
     updateEmulsifierTable();
     document.getElementById('requiredHLB').textContent = '0.00';
