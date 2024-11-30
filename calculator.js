@@ -56,19 +56,19 @@ function addIngredient(type) {
     manualIngredient = document.getElementById('manualIngredient').value;
   }
 
-  if (
-    ((manualIngredient || selectedIngredient) !== '') && !isNaN(percentage)) {
+  if ((manualIngredient || selectedIngredient) && !isNaN(percentage)) {
+
+    const ingredientData = chemicalIngredients.find(ing => ing.name === selectedIngredient) || { density: null };
+
     // Calculate grams only if `batchSize` is a valid number
     if (batchSize) {
       calculatedGrams = (percentage / 100) * batchSize;
-      calculatedVolume = calculatedGrams / ingredientData.density;
+      calculatedVolume = ingredientData.density ? calculatedGrams / ingredientData.density : null;
 
     }
 
-    const ingredientData = chemicalIngredients.find(ing => ing.name === ( selectedIngredient));
-
-    if (!batchSize && ingredientData.density) {
-      calculatedVolume = percentage / ingredientData.density;
+    if (!ingredientData.density) {
+      calculatedVolume = null; 
     }
 
 
