@@ -54,6 +54,7 @@ function printResults() {
             <th>Ingredient</th>
             <th>Percentage (%)</th>
             <th>Weight (g)</th>
+            <th>Volume (ml)</th>
           </tr>
   `;
 
@@ -64,6 +65,7 @@ function printResults() {
         <td>${row.cells[0].textContent}</td>
         <td>${row.cells[1].textContent}</td>
         <td>${row.cells[2].textContent}</td>
+        <td>${row.cells[3].textContent}</td>
       </tr>
     `;
   });
